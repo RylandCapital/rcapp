@@ -1,0 +1,21 @@
+// Customize any SASS variables here
+@import "~@progress/kendo-theme-bootstrap/dist/all.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.page-container {
+  margin: 1rem;
+  overflow:hidden ;
+}
+
+@import "styles/header";
+@import "styles/layout";
+@import "styles/panels";

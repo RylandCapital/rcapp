@@ -1,0 +1,61 @@
+.manager h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    padding-top: 15px;
+    margin: 0;
+  }
+  .manager p {
+    margin: 0;
+    font-size: 0.75rem;
+  }
+  .manager img {
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 50%;
+  }
+  .manager-info {
+    display: inline-block;
+  }
+  .fund-detail-list {
+    font-size: 0.9rem;
+  }
+  .fund-detail-list span {
+    display: block;
+  }
+  .fund-detail-list span:first-child {
+    font-weight: bold;
+  }
+  .fund-detail-list span:last-child {
+    margin-bottom: 0.2rem;
+  }
+  
+  .change-up {
+    color: green;
+  }
+  .change-down {
+    color: red;
+  }
+  
+  .panels > * > * {
+    transition: opacity 0.5s ease-in;
+    overflow:hidden ;
+  }
+  
+  .k-icon.k-i-loading {
+    font-size: 50px;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    height: 100%;
+  }
+  
+  
+  .k-grid {
+    font-size: 0.9rem;
+  }
+  .k-grid td, .k-grid-header .k-header > .k-link {
+    text-overflow: initial;
+  }
