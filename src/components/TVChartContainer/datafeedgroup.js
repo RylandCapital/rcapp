@@ -10,7 +10,7 @@ function Get(yourUrl){
     return Httpreq.responseText;          
   }
   
-  var positions = JSON.parse(Get('https://api.option-i.com/agggroup'));
+  var positions = JSON.parse(Get('http://18.216.242.3/agggroup'));
   console.log(positions)
   const product_keys = Object.keys(positions[0]).filter(function(number){
     return number !== 'date'
