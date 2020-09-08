@@ -42,7 +42,7 @@ async function getAllSymbols() {
             products.forEach(ts => {
                 allSymbols = [...allSymbols, {
                     description: ts,
-                    exchange: ts,
+                    exchange: '',
                     full_name: ts,
                     symbol: ts,
                     type: 'ALT',
