@@ -5,8 +5,6 @@ import { Drawer, DrawerContent} from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 
 
-
-
 const items =[
   { text: "Sectors", icon: 'k-i-inbox', children: null, route: '/' },
   { text: "Groups", icon: 'k-i-bell', children: null, route: '/groups' },
@@ -23,7 +21,7 @@ class DrawerRouterContainer extends React.Component {
     }
 
     onSelect = (e) => {
-        this.setState({selectedId: e.itemIndex, expanded: false});
+        this.setState({selectedId: e.itemIndex, expanded: true});
         this.props.history.push(e.itemTarget.props.route);
     }
 
