@@ -41,12 +41,13 @@ async function getAllSymbols() {
             let products = Object.keys(positions[0])
             products.forEach(ts => {
                 allSymbols = [...allSymbols, {
-                    description: ts,
+                    description: ts.replaceAll('_', ' '),
                     exchange: '',
-                    full_name: ts,
-                    symbol: ts,
+                    full_name: ts.replaceAll('_', ' '),
+                    full_name2: ts,
+                    symbol: ts.replaceAll('_', ' '),
                     type: 'ALT',
-                }];  
+                }];   
             });
             
             return allSymbols;
@@ -72,14 +73,15 @@ export default {
     resolveSymbol: async (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) => {
         console.log('[resolveSymbol]: Method call', symbolName);
         const symbols = await getAllSymbols();
-        const symbolItem = symbols.find(({ full_name }) => full_name === symbolName);
+        const symbolItem = symbols.find(({ full_name }) => full_name === symbolName.replaceAll('_', ' '));
         if (!symbolItem) {
-            console.log('[resolveSymbol]: Cannot resolve symbol', symbolName);
+            console.log('[resolveSymbol]: Cannot resolve symbol', symbolName.replaceAll('_', ' '));
             onResolveErrorCallback('cannot resolve symbol');
             return;
         }
         const symbolInfo = {
             name: symbolItem.symbol,
+            name2: symbolItem.full_name2,
             description: symbolItem.description,
             type: symbolItem.type,
             exchange: symbolItem.exchange,
@@ -99,7 +101,7 @@ export default {
                 return;
             }
             let bars = [];
-            let full_name = symbolInfo.name
+            let full_name = symbolInfo.name2
             data.forEach(bar => {
                 if (bar.time >= from && bar.time < to) {
                     bars = [...bars, {
