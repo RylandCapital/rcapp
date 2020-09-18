@@ -11,7 +11,7 @@ function getLanguageFromURL() {
 
 export class TVChartContainer extends React.PureComponent {
 	static defaultProps = {
-		symbol: 'SECTOR_FINANCIALS_NH_NL_DIFF',
+		symbol: 'SECTOR_FINANCIALS_NH_NL253',
 		interval: 'D',
 		containerId: 'tv_chart_container',
 		datafeed: Datafeed,
