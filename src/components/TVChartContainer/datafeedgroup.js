@@ -10,26 +10,26 @@ function Get(yourUrl){
     return Httpreq.responseText;          
   }
   
-  var positions = JSON.parse(Get('http://18.216.242.3/agggroup'));
-  console.log(positions)
-  const product_keys = Object.keys(positions[0]).filter(function(number){
+  var positions2 = JSON.parse(Get('http://18.216.242.3/agggroup'));
+  console.log(positions2)
+  const product_keys = Object.keys(positions2[0]).filter(function(number){
     return number !== 'date'
   });
   
   
   product_keys.forEach((key) => {
-    positions.forEach((item) => {
+    positions2.forEach((item) => {
       item.date = new Date(item.date)
       item[key] = Number(Number(item[key]).toFixed(3))
       item.time = item.date.getTime()/1000
       
     })
   });
-  console.log(positions)
+  console.log(positions2)
  
 export async function makeApiRequest() {
     try {
-        return positions;
+        return positions2;
     } catch(error) {
         throw new Error(`request error: ${error.status}`);
     }
@@ -38,7 +38,7 @@ export async function makeApiRequest() {
 async function getAllSymbols() {
 
             let allSymbols = [];
-            let products = Object.keys(positions[0])
+            let products = Object.keys(positions2[0])
             products.forEach(ts => {
                 allSymbols = [...allSymbols, {
                     description: ts.replaceAll('_', ' '),
@@ -53,7 +53,7 @@ async function getAllSymbols() {
             return allSymbols;
         }
 
-export default {
+const Datafeed = {
     onReady: (callback) => {
         console.log('[onReady]: Method call');
         setTimeout(() => callback(configurationData))
@@ -128,4 +128,9 @@ export default {
         console.log('[unsubscribeBars]: Method call with subscriberUID:', subscriberUID);
     },
 };
+
+export {
+    Datafeed,
+    positions2
+}
 

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './index.css';
 import { widget } from '../../charting_library/charting_library.min';
-import Datafeed from './datafeed.js';
+import { Datafeed } from './datafeed.js';
+import { indicator } from './indicator_template.js';
 
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
@@ -46,6 +47,7 @@ export class TVChartContainer extends React.PureComponent {
 			fullscreen: this.props.fullscreen,
 			autosize: this.props.autosize,
 			studies_overrides: this.props.studiesOverrides,
+			custom_indicators_getter: indicator
 		};
 
 		const tvWidget = new widget(widgetOptions);

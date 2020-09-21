@@ -23,7 +23,7 @@ product_keys.forEach((key) => {
     
   })
 });
-console.log(dyvolsheet)
+
 export {
   dyvolsheet,
 }

@@ -52,7 +52,7 @@ async function getAllSymbols() {
             return allSymbols;
         }
 
-export default {
+const Datafeed = {
     onReady: (callback) => {
         console.log('[onReady]: Method call');
         setTimeout(() => callback(configurationData))
@@ -128,3 +128,8 @@ export default {
     },
 };
 
+
+export {
+    Datafeed,
+    positions
+}
