@@ -24,6 +24,13 @@ export class TVChartContainer extends React.PureComponent {
 		fullscreen: false,
 		autosize: true,
 		studiesOverrides: {},
+		time_frames: [
+			{ text: "50y", resolution: "6M", description: "50 Years" },
+			{ text: "3y", resolution: "1D", description: "3 Years", title: "3yr" },
+			{ text: "8m", resolution: "1D", description: "8 Month" },
+			{ text: "3d", resolution: "5", description: "3 Days" },
+			{ text: "1000y", resolution: "1W", description: "All", title: "All" },
+		]
 	};
 
 	tvWidget = null;
@@ -47,6 +54,7 @@ export class TVChartContainer extends React.PureComponent {
 			fullscreen: this.props.fullscreen,
 			autosize: this.props.autosize,
 			studies_overrides: this.props.studiesOverrides,
+			time_frames: this.props.time_frames,
 			custom_indicators_getter: indicator
 		};
 

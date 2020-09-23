@@ -90,7 +90,8 @@ const Datafeed = {
         console.log('[resolveSymbol]: Symbol resolved', symbolInfo);
         onSymbolResolvedCallback(symbolInfo);
     },
-    getBars: async (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) => {
+    getBars: async (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback,
+         firstDataRequest) => {
         console.log('[getBars]: Method call', symbolInfo, resolution, from, to);
         try {
             const data = await makeApiRequest();
@@ -103,7 +104,7 @@ const Datafeed = {
             let bars = []; 
             let full_name = symbolInfo.name2
             data.forEach(bar => {
-                if (bar.time >= 895761931 && bar.time < to) {
+                if (bar.time >= from && bar.time < to) {
                     bars = [...bars, {
                         time: bar.date,
                         low: bar[full_name],
