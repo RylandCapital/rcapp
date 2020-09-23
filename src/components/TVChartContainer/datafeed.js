@@ -94,15 +94,16 @@ const Datafeed = {
         console.log('[getBars]: Method call', symbolInfo, resolution, from, to);
         try {
             const data = await makeApiRequest();
+            
             if (data.Response && data.Response === 'Error') {
                 // "noData" should be set if there is no data in the requested period.
                 onHistoryCallback([], { noData: true });
                 return;
             }
-            let bars = [];
+            let bars = []; 
             let full_name = symbolInfo.name2
             data.forEach(bar => {
-                if (bar.time >= from && bar.time < to) {
+                if (bar.time >= 895761931 && bar.time < to) {
                     bars = [...bars, {
                         time: bar.date,
                         low: bar[full_name],
@@ -112,9 +113,12 @@ const Datafeed = {
                     }];
                 }
             });
-            
+            console.log(bars);
+            console.log(data)
+            console.log(from)
+            console.log(to)
             console.log(`[getBars]: returned ${bars.length} bar(s)`);
-            onHistoryCallback(bars, { noData: false });
+            onHistoryCallback(bars, { noData: true });
         } catch (error) {
             console.log('[getBars]: Get error', error);
             onErrorCallback(error);
