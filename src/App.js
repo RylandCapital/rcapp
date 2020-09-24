@@ -11,7 +11,7 @@ import Dashboardfv from "./Dashboardfv";*/
 
 import { HashRouter, Switch, Route } from 'react-router-dom';
 
-
+//           <Route exact={true} path="/groups" component={DashboardGroup} />
 import "./App.scss";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <DrawerRouterContainer >
             <Switch>
                 <Route exact={true} path="/" component={Dashboard} />
-                <Route exact={true} path="/groups" component={DashboardGroup} />
+    
             </Switch>
         </DrawerRouterContainer >
     </HashRouter>

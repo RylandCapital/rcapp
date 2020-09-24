@@ -4,6 +4,17 @@ import { widget } from '../../charting_library/charting_library.min';
 import { Datafeed } from './datafeed.js';
 import { indicator } from './indicator_template.js';
 
+
+function Get(yourUrl){
+	var Httpreq = new XMLHttpRequest(); // a new request
+	Httpreq.open("GET",yourUrl,false);
+	Httpreq.send(null);
+	return Httpreq.responseText;          
+  }
+const chart = JSON.parse(Get('http://ec2-18-222-179-255.us-east-2.compute.amazonaws.com/1.1/charts?client=Option-i2&user=RylandCapital&chart=7'))
+const chart2 = JSON.parse(chart.data.content)
+const chart3 = JSON.parse(chart2.content)
+
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
 	const results = regex.exec(window.location.search);
@@ -25,12 +36,12 @@ export class TVChartContainer extends React.PureComponent {
 		autosize: true,
 		studiesOverrides: {},
 		time_frames: [
-			{ text: "50y", resolution: "6M", description: "50 Years" },
+			{ text: "1m", resolution: "1D", description: "1 Month" },
+			{ text: "12m", resolution: "1D", description: "8 Month" },
 			{ text: "3y", resolution: "1D", description: "3 Years", title: "3yr" },
-			{ text: "8m", resolution: "1D", description: "8 Month" },
-			{ text: "3d", resolution: "5", description: "3 Days" },
-			{ text: "1000y", resolution: "1W", description: "All", title: "All" },
-		]
+			{ text: "5y", resolution: "1D", description: "5 Years", title: "5yr" },
+			{ text: "1000y", resolution: "1D", description: "All", title: "All" },
+		],		
 	};
 
 	tvWidget = null;
@@ -38,8 +49,6 @@ export class TVChartContainer extends React.PureComponent {
 	componentDidMount() {
 		const widgetOptions = {
 			symbol: this.props.symbol,
-			// BEWARE: no trailing slash is expected in feed URL
-			/*datafeed: new window.Datafeeds.UDFCompatibleDatafeed(this.props.datafeedUrl),*/
 			datafeed: this.props.datafeed,
 			interval: this.props.interval,
 			container_id: this.props.containerId,
@@ -55,13 +64,17 @@ export class TVChartContainer extends React.PureComponent {
 			autosize: this.props.autosize,
 			studies_overrides: this.props.studiesOverrides,
 			time_frames: this.props.time_frames,
-			custom_indicators_getter: indicator
+			custom_indicators_getter: indicator,
+			saved_data: chart3
+			
 		};
+		
 
 		const tvWidget = new widget(widgetOptions);
 		this.tvWidget = tvWidget;
 
 		tvWidget.onChartReady(() => {
+			
 			tvWidget.headerReady().then(() => {
 				const button = tvWidget.createButton();
 				button.setAttribute('title', 'Click to show a notification popup');

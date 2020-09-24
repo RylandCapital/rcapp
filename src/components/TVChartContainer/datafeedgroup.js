@@ -11,7 +11,6 @@ function Get(yourUrl){
   }
   
   var positions2 = JSON.parse(Get('http://18.216.242.3/agggroup'));
-  console.log(positions2)
   const product_keys = Object.keys(positions2[0]).filter(function(number){
     return number !== 'date'
   });
@@ -25,7 +24,6 @@ function Get(yourUrl){
       
     })
   });
-  console.log(positions2)
  
 export async function makeApiRequest() {
     try {

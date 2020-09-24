@@ -11,7 +11,6 @@ function Get(yourUrl){
   }
   
   var positions = JSON.parse(Get('http://18.216.242.3/aggsector'));
-  console.log(positions)
   const product_keys = Object.keys(positions[0]).filter(function(number){
     return number !== 'date'
   });
@@ -25,7 +24,6 @@ function Get(yourUrl){
       
     })
   });
-  console.log(positions)
  
 export async function makeApiRequest() {
     try {
@@ -96,11 +94,6 @@ const Datafeed = {
         try {
             const data = await makeApiRequest();
             
-            if (data.Response && data.Response === 'Error') {
-                // "noData" should be set if there is no data in the requested period.
-                onHistoryCallback([], { noData: true });
-                return;
-            }
             let bars = []; 
             let full_name = symbolInfo.name2
             data.forEach(bar => {
@@ -114,12 +107,12 @@ const Datafeed = {
                     }];
                 }
             });
-            console.log(bars);
-            console.log(data)
-            console.log(from)
-            console.log(to)
+
+            onHistoryCallback(bars, { noData: false })
             console.log(`[getBars]: returned ${bars.length} bar(s)`);
-            onHistoryCallback(bars, { noData: true });
+            if (bars.length === 0) {
+                onHistoryCallback(bars, { noData: true });
+            }
         } catch (error) {
             console.log('[getBars]: Get error', error);
             onErrorCallback(error);
@@ -131,6 +124,16 @@ const Datafeed = {
     unsubscribeBars: (subscriberUID) => {
         console.log('[unsubscribeBars]: Method call with subscriberUID:', subscriberUID);
     },
+
+    calculateHistoryDepth : (resolution, resolutionBack, intervalBack) => {
+        if (resolution === "D") {
+            console.log('here')
+            return {
+                resolutionBack: 'M',
+                intervalBack: 5000
+            };
+        }
+    }
 };
 
 
