@@ -1,9 +1,9 @@
 import React from "react";
 /*import { ContractHistoryData } from "./panels/ContractHistoryEnterprise";*/
-import { TVChartContainer } from './components/TVChartContainer/indexgroup';
+import { TVChartContainer } from './components/TVChartContainer/index2';
 
 
-export default function DashboardGroup() {
+export default function Dashboard2() {
   return (
     <div className="panels" >
       <div >

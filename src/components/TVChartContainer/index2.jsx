@@ -1,8 +1,19 @@
 import * as React from 'react';
 import './index.css';
 import { widget } from '../../charting_library/charting_library.min';
-import { Datafeed } from './datafeedgroup.js';
+import { Datafeed } from './datafeed.js';
 import { indicator } from './indicator_template.js';
+
+
+function Get(yourUrl){
+	var Httpreq = new XMLHttpRequest(); // a new request
+	Httpreq.open("GET",yourUrl,false);
+	Httpreq.send(null);
+	return Httpreq.responseText;          
+  }
+const chart = JSON.parse(Get('http://ec2-18-222-179-255.us-east-2.compute.amazonaws.com/1.1/charts?client=Option-i2&user=RylandCapital&chart=7'))
+const chart2 = JSON.parse(chart.data.content)
+const chart3 = JSON.parse(chart2.content)
 
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
@@ -12,19 +23,18 @@ function getLanguageFromURL() {
 
 export class TVChartContainer extends React.PureComponent {
 	static defaultProps = {
-		symbol: 'GROUP_ENERGY_NH_NL253',
+		symbol: 'SECTOR_FINANCIALS_NH_NL253',
 		interval: 'D',
 		containerId: 'tv_chart_container',
-		/*datafeedUrl: 'https://demo_feed.tradingview.com',*/
 		datafeed: Datafeed,
 		libraryPath: '/charting_library/',
-		chartsStorageUrl: 'https://saveload.tradingview.com',
+		chartsStorageUrl: 'http://ec2-18-222-179-255.us-east-2.compute.amazonaws.com',
 		chartsStorageApiVersion: '1.1',
-		clientId: 'tradingview.com',
-		userId: 'public_user_id',
+		clientId: 'Option-i2',
+		userId: 'RylandCapital',
 		fullscreen: false,
 		autosize: true,
-		studiesOverrides: {},
+		studiesOverrides: {},	
 	};
 
 	tvWidget = null;
@@ -32,8 +42,6 @@ export class TVChartContainer extends React.PureComponent {
 	componentDidMount() {
 		const widgetOptions = {
 			symbol: this.props.symbol,
-			// BEWARE: no trailing slash is expected in feed URL
-			/*datafeed: new window.Datafeeds.UDFCompatibleDatafeed(this.props.datafeedUrl),*/
 			datafeed: this.props.datafeed,
 			interval: this.props.interval,
 			container_id: this.props.containerId,
@@ -48,13 +56,17 @@ export class TVChartContainer extends React.PureComponent {
 			fullscreen: this.props.fullscreen,
 			autosize: this.props.autosize,
 			studies_overrides: this.props.studiesOverrides,
-			custom_indicators_getter: indicator
+			time_frames: this.props.time_frames,
+			custom_indicators_getter: indicator,
+			saved_data: chart3
+			
 		};
-
+		
 		const tvWidget = new widget(widgetOptions);
 		this.tvWidget = tvWidget;
 
 		tvWidget.onChartReady(() => {
+			
 			tvWidget.headerReady().then(() => {
 				const button = tvWidget.createButton();
 				button.setAttribute('title', 'Click to show a notification popup');
@@ -88,3 +100,4 @@ export class TVChartContainer extends React.PureComponent {
 		);
 	}
 }
+

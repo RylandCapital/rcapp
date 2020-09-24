@@ -1,5 +1,5 @@
 import { positions } from './datafeed.js';
-import { positions2 } from './datafeedgroup.js';
+//import { positions2 } from './datafeedgroup.js';
 
 
 
@@ -7,15 +7,10 @@ const product_keys = Object.keys(positions[0]).filter(function(number){
     return number !== 'index'
   });
 
-const product_keys2 = Object.keys(positions2[0]).filter(function(number){
-    return number !== 'index'
-  });
-
-const product_keys3 = product_keys.concat(product_keys2)
 
 export const indicator = function(PineJS) {
     const indicators = []
-    product_keys3.forEach((key) => {
+    product_keys.forEach((key) => {
             const oneindy = {
                name: key.replaceAll('_', ' '),
                metainfo: {

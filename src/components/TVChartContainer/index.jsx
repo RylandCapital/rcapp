@@ -34,14 +34,7 @@ export class TVChartContainer extends React.PureComponent {
 		userId: 'RylandCapital',
 		fullscreen: false,
 		autosize: true,
-		studiesOverrides: {},
-		time_frames: [
-			{ text: "1m", resolution: "1D", description: "1 Month" },
-			{ text: "12m", resolution: "1D", description: "8 Month" },
-			{ text: "3y", resolution: "1D", description: "3 Years", title: "3yr" },
-			{ text: "5y", resolution: "1D", description: "5 Years", title: "5yr" },
-			{ text: "1000y", resolution: "1D", description: "All", title: "All" },
-		],		
+		studiesOverrides: {},	
 	};
 
 	tvWidget = null;
@@ -69,7 +62,6 @@ export class TVChartContainer extends React.PureComponent {
 			
 		};
 		
-
 		const tvWidget = new widget(widgetOptions);
 		this.tvWidget = tvWidget;
 
