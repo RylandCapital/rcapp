@@ -3,10 +3,12 @@ import "hammerjs";
 import DrawerRouterContainer from "./layout/DrawerContainer.js";
 
 import Dashboard from "./Dashboard";
-import DashboardGroup from "./Dashboard2";
+import Dashboard2 from "./Dashboard2";
 
 
 import { HashRouter, Switch, Route } from 'react-router-dom';
+
+
 import "./App.scss";
 
 function App() {
@@ -16,8 +18,7 @@ function App() {
         <DrawerRouterContainer >
             <Switch>
                 <Route exact={true} path="/" component={Dashboard} />
-                <Route exact={true} path="/2" component={DashboardGroup} />
-    
+                <Route exact={true} path="/groups" component={Dashboard2} />
             </Switch>
         </DrawerRouterContainer >
     </HashRouter>

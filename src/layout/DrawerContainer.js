@@ -6,8 +6,8 @@ import { Button } from '@progress/kendo-react-buttons';
 
 
 const items =[
-  { text: "Financials", icon: 'k-i-inbox', children: null, route: '/' },
-  { text: "Diversified Financials", icon: 'k-i-bell', children: null, route: '/2' },
+  { text: "Sectors", icon: 'k-i-inbox', children: null, route: '/' },
+  { text: "Groups", icon: 'k-i-bell', children: null, route: '/groups' },
 ];
 
 class DrawerRouterContainer extends React.Component {
