@@ -52,6 +52,7 @@ async function getAllSymbols() {
 
 const Datafeed = {
     onReady: (callback) => {
+        
         console.log('[onReady]: Method call');
         setTimeout(() => callback(configurationData))
     },
